@@ -5,6 +5,19 @@ import Syntax
 e1 :: Expr
 e1 = BinExpr (BinExpr (Value (IntVal 5)) (Arith Div) (Value (IntVal 6))) (Arith Add) (BinExpr (Value (IntVal 7)) (Arith Mul) (Value (IntVal 8)))
 
+-- 3 - 4 * 5 AND 6 / 3 + 2 OR 1 < 2
+e2 :: Expr
+e2 = BinExpr
+        (BinExpr
+            (BinExpr
+                (Value (IntVal 3)) (Arith Sub) (BinExpr (Value (IntVal 4)) (Arith Mul) (Value (IntVal 5))))
+                (Logic And)
+                (BinExpr (BinExpr (Value (IntVal 6)) (Arith Div) (Value (IntVal 3))) (Arith Add) (Value (IntVal 2))))
+                (Logic Or)
+                (BinExpr (Value (IntVal 1)) (Comp Lt) (Value (IntVal 2)
+            )
+        )
+
 -- a = 5; b = 6; a + b
 p1 :: Prog
 p1 = Program ss1

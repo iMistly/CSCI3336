@@ -10,7 +10,7 @@ module Syntax where
 <arithmaticOp> -> + | - | * | /
 <comparisonOp> -> eq | gt | lt | geq | leq
 <logicOp> -> And | Or
-<expr> -> <val> | <expr> <op> <expr> | func <var> <expr> | <expr> <expr>
+<expr> -> <val> | <expr> <op> <expr> | func <var> <expr> | app <expr> <expr>
 <val> -> integers | booleans | strings
 -}
 data Prog = Program Stmts -- Prog is a data type while Program is a constructor
@@ -71,8 +71,8 @@ precedence (Comp Gt) = -1
 precedence (Comp Lt) = -1
 precedence (Comp Geq) = -1
 precedence (Comp Leq) = -1
-precedence (Logic And) = -1
-precedence (Logic Or) = -1
+precedence (Logic And) = -2
+precedence (Logic Or) = -2
 
 -- Paranthesis for clarity
 requiresParenth :: Op -> Expr -> Bool
