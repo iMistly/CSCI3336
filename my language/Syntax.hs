@@ -14,19 +14,16 @@ module Syntax where
 <val> -> integers | booleans | strings
 -}
 data Prog = Program Stmts -- Prog is a data type while Program is a constructor
-    -- deriving Show
 
 data Stmts = End Stmt 
            | Sequence Stmt Stmts
-    -- deriving Show
 
 data Stmt = Assign Var Expr 
           | IfThen Expr Stmts
           | IfThenElse Expr Stmts Stmts
           | While Expr Stmts 
-          | For Stmt Expr Stmt Stmts
+          | For Stmt Expr Stmt Stmts -- init, check, update, body
           | Print Expr
-    -- deriving Show
 
 type Var = String
 
@@ -40,7 +37,6 @@ data LogicOp = And | Or -- Logical Operators
     deriving Show
 
 data Op = Arith ArithOp | Comp CompOp | Logic LogicOp
-    -- deriving Show
 
 data Expr = Value Val -- just a value
           | UnaryExp Expr -- not logical operator
@@ -48,13 +44,15 @@ data Expr = Value Val -- just a value
           | Func Var Type Expr -- function definition
           | App Expr Expr -- function application
           | Ref Var -- variable reference
-    -- deriving Show
 
-data Val = IntVal Int | BoolVal Bool | StringVal String | ErrorVal String-- Int, Bool and String are predefined types in Haskell
-    -- deriving Show
+-- Int, Bool and String are predefined types in Haskell
+data Val = IntVal Int
+         | BoolVal Bool
+         | StringVal String
+         | ErrorVal String
 
+-- The type is different from the value itself. The type is used for type checking
 data Type = IntType | BoolType | StringType
-    -- deriving Show
 
 type Env = [(Type, Var, Val)]
 
