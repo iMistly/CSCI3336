@@ -67,6 +67,7 @@ evaluate (App (Func x t e1) e2) env = case (evaluate e2 env, t) of
                                         (IntVal vi, IntType) -> evaluate e1 ((IntType, x, IntVal vi) : env)
                                         (BoolVal vb, BoolType) -> evaluate e1 ((BoolType, x, BoolVal vb) : env)
                                         (StringVal vs, StringType) -> evaluate e1 ((StringType, x, StringVal vs) : env)
+                                        (ErrorVal s, _) -> ErrorVal s
                                         _ -> ErrorVal "Type mismatch in function application"
 evaluate (Ref x) env = case lookupVar x env of
                         Nothing -> ErrorVal "Variable not in scope"

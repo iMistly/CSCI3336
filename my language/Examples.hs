@@ -34,7 +34,7 @@ s2 = Assign "b" (Value (IntVal 6))
 s3 :: Stmt
 s3 = Print (BinExpr (Ref "a") (Arith Add) (Ref "b"))
 
--- square(x) = x * x; square(5)
+-- input 5 into square function
 p2 :: Prog
 p2 = Program ss2
 
@@ -42,10 +42,13 @@ ss2 :: Stmts
 ss2 = Sequence s4 (End s5)
 
 s4 :: Stmt
-s4 = Assign "square" (Func "x" IntType (BinExpr (Ref "x") (Arith Mul) (Ref "x")))
+s4 = Assign "a" (Value (IntVal 5))
+
+f :: Expr
+f = Func "x" IntType (BinExpr (Ref "x") (Arith Mul) (Ref "x"))
 
 s5 :: Stmt
-s5 = Print (App (Ref "square") (Value (IntVal 5)))
+s5 = Assign "b" (App f (Ref "a"))
 
 -- c = 0; while (c <= 5) do { print c; c = c + 1;  }
 p3 :: Prog

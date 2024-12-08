@@ -104,7 +104,7 @@ instance Show Expr where
     show (BinExpr e1 op e2) = if requiresParenth op e2 then
                                 show e1 ++ " " ++ show op ++ " (" ++ show e2 ++ ")"
                                 else show e1 ++ " " ++ show op ++ " " ++ show e2
-    show (Func x t e) = "func " ++ x ++ " : " ++ show t ++ " -> " ++ show e
+    show (Func x t e) = "func(" ++ x ++ ":" ++ show t ++ ") -> {" ++ show e ++ "}"
     show (App e1 e2) = show e1 ++ "(" ++ show e2 ++ ")"
     show (Ref x) = x
 
